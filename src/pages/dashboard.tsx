@@ -1,5 +1,5 @@
-import { Flex, Text, Input, Icon } from '@chakra-ui/react'
-import { RiSearchLine } from 'react-icons/ri'
+import { Flex, Text, Input, Icon, Stack, Box, Avatar } from '@chakra-ui/react'
+import { RiNotificationLine, RiSearchLine, RiUserAddLine } from 'react-icons/ri'
 
 export default function Dashboard() {
   return (
@@ -13,16 +13,16 @@ export default function Dashboard() {
       px="6"
       align="center"
     >
-      <Text 
-      fontSize="3xl" 
-      fontWeight="bold" 
-      letterSpacing="tight"
-      w="64"
+      <Text
+        fontSize="3xl"
+        fontWeight="bold"
+        letterSpacing="tight"
+        w="64"
       >
         dashgo</Text>
-        <Text as="span" ml="1" color="pink.500"></Text>
+      <Text as="span" ml="1" color="pink.500"></Text>
 
-        <Flex
+      <Flex
         as="label"
         flex="1"
         py="4"
@@ -34,18 +34,51 @@ export default function Dashboard() {
         position="relative"
         bg="gray.800"
         borderRadius="full"
-        >
-          <Input 
+      >
+        <Input
           color="gray.50"
           variant="unstyled"
           px="4"
           mr="4"
           placeholder="Buscar na plataforma"
           _placeholder={{ color: 'gray.400' }}
-          />
+        />
 
-          <Icon as={RiSearchLine} fontSize="20" />
+        <Icon as={RiSearchLine} fontSize="20" />
+      </Flex>
+
+      <Flex
+        align="center"
+        ml="auto"
+      >
+        <Stack
+          spacing="4"
+          mx="8"
+          pr="8"
+          py="1"
+          color="gray.300"
+          borderRightWidth={1}
+          borderColor="gray.700"
+        >
+          <Icon as={RiNotificationLine} fontSize="20" />
+          <Icon as={RiUserAddLine} fontSize="20" />
+        </Stack>
+
+        <Flex align="center">
+          <Box mr="4" textAlign="right">
+            <Text>Cristiano Rasweiler Neto</Text>
+            <Text color="gray.300" fontSize="small">
+              cristianorneto@gmail.com
+            </Text>
+          </Box>
+
+          <Avatar
+            size="md"
+            name="Cristiano Rasweiler Neto"
+            src="https://github.com/neto112.png"
+          />
         </Flex>
+      </Flex>
     </Flex>
   )
 }
