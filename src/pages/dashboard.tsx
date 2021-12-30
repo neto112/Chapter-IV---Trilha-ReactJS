@@ -1,84 +1,88 @@
-import { Flex, Text, Input, Icon, Stack, Box, Avatar } from '@chakra-ui/react'
-import { RiNotificationLine, RiSearchLine, RiUserAddLine } from 'react-icons/ri'
+import dynamic from 'next/dynamic';
 
-export default function Dashboard() {
+import { Box, Flex, SimpleGrid, Text, theme } from '@chakra-ui/react';
+
+import { Header } from '../components/Header';
+import { Sidebar } from '../components/Sidebar';
+
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+
+const options = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+    foreColor: theme.colors.gray[500],
+  },
+  grid: {
+    show: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  tooltip: {
+    enabled: false,
+  },
+  xaxis: {
+    type: 'datetime',
+    axisBorder: {
+      color: theme.colors.gray[600],
+    },
+    axisTicks: {
+      color: theme.colors.gray[600],
+    },
+    categories: [
+      '2021-03-18T00:00:00.000Z',
+      '2021-03-19T00:00:00.000Z',
+      '2021-03-20T00:00:00.000Z',
+      '2021-03-21T00:00:00.000Z',
+      '2021-03-22T00:00:00.000Z',
+      '2021-03-23T00:00:00.000Z',
+      '2021-03-24T00:00:00.000Z',
+    ],
+  },
+  fill: {
+    opacity: 0.3,
+    type: 'gradient',
+    gradient: {
+      shade: 'dark',
+      opacityFrom: '0.7',
+      opacityTo: '0.3',
+    },
+  },
+};
+
+const series = [
+  { name: 'series1', data: [31, 120, 10, 28, 61, 18, 109] }
+];
+
+export default function Dashboard(): JSX.Element {
   return (
-    <Flex
-      as="header"
-      w="100%"
-      maxWidth={1400}
-      h="20"
-      mx="auto"
-      mt="4"
-      px="6"
-      align="center"
-    >
-      <Text
-        fontSize="3xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        w="64"
-      >
-        dashgo</Text>
-      <Text as="span" ml="1" color="pink.500"></Text>
+    <Flex direction="column" h="100vh">
+      <Header />
 
-      <Flex
-        as="label"
-        flex="1"
-        py="4"
-        px="8"
-        ml="6"
-        maxWidth={400}
-        alignSelf="center"
-        color="gray.200"
-        position="relative"
-        bg="gray.800"
-        borderRadius="full"
-      >
-        <Input
-          color="gray.50"
-          variant="unstyled"
-          px="4"
-          mr="4"
-          placeholder="Buscar na plataforma"
-          _placeholder={{ color: 'gray.400' }}
-        />
+      <Flex w="100%" my="6" maxWidth="1480" mx="auto" px="6">
+        <Sidebar />
 
-        <Icon as={RiSearchLine} fontSize="20" />
-      </Flex>
-
-      <Flex
-        align="center"
-        ml="auto"
-      >
-        <Stack
-          spacing="4"
-          mx="8"
-          pr="8"
-          py="1"
-          color="gray.300"
-          borderRightWidth={1}
-          borderColor="gray.700"
-        >
-          <Icon as={RiNotificationLine} fontSize="20" />
-          <Icon as={RiUserAddLine} fontSize="20" />
-        </Stack>
-
-        <Flex align="center">
-          <Box mr="4" textAlign="right">
-            <Text>Cristiano Rasweiler Neto</Text>
-            <Text color="gray.300" fontSize="small">
-              cristianorneto@gmail.com
+        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+          <Box p={['6', '8']} bg="gray.800" borderRadius={8} pb="4">
+            <Text fontSize="lg" mb="4">
+              Inscritos da semana
             </Text>
+            <Chart options={options} series={series} type="area" height={160} />
           </Box>
 
-          <Avatar
-            size="md"
-            name="Cristiano Rasweiler Neto"
-            src="https://github.com/neto112.png"
-          />
-        </Flex>
+          <Box p="8" bg="gray.800" borderRadius={8} pb="4">
+            <Text fontSize="lg" mb="4">
+              Taxa de Abertura
+            </Text>
+            <Chart options={options} series={series} type="area" height={160} />
+          </Box>
+        </SimpleGrid>
       </Flex>
     </Flex>
-  )
+  );
 }
