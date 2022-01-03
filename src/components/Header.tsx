@@ -1,7 +1,7 @@
 import { Flex, Text, Input, Icon, Stack, Box, Avatar } from '@chakra-ui/react'
 import { RiNotificationLine, RiSearchLine, RiUserAddLine } from 'react-icons/ri'
 
-export default function Dashboard() {
+export default function Header () {
   return (
     <Flex
       as="header"

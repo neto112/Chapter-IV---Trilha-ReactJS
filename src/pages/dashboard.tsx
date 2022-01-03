@@ -23,7 +23,7 @@ const options = {
   dataLabels: {
     enabled: false,
   },
-  tooltip: {
+  tooltip: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     enabled: false,
   },
   xaxis: {
